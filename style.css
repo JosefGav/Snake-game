@@ -1,0 +1,20 @@
+#game {
+    display: inline-grid;
+    height: 600px;
+    width: 600px;
+    background-color:  black;
+    grid-template-columns: repeat(40,1fr);
+    grid-template-rows: repeat(40,1fr);
+}
+
+.empty {
+    background-color: black;
+}
+
+.snake,.head {
+    background-color: darkgreen;
+}
+
+.apple {
+    background-color: red;
+}
