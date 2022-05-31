@@ -79,23 +79,8 @@ document.addEventListener("keydown",e => {
             leadingBall.direction = directions.left;
             break;
         case 82:
-            leadingBall = {
-                x:20,
-                y:39,
-                direction: directions.up,
-            }
-            historyOfLeadingBallPositions = [[leadingBall.x,leadingBall.y]];
-            snakeLength = 5;
-
-            for (let y = 0; y < 40 ; y ++) {
-                for (let x = 0; x < 40; x++){
-                    grid[y][x].status = statuses.empty;
-                }
-            }
-            gameState = 0;
-            setTimeout(()=> grid[Math.floor(Math.random()*40)][Math.floor(Math.random()*40)].status = statuses.apple, 100)
-            }
-
+            reload();
+    }
 })
 
 function generateFood() {
@@ -111,7 +96,6 @@ function generateFood() {
 } 
 
 function changeDirection(direction){
-    if (gameState != 2) gameState = 1;
     if (gameState === 1 && leadingBall.direction != direction) {
         for (let i = 0; i < snakeLength; i++) {
             try{grid[historyOfLeadingBallPositions[i][1]][historyOfLeadingBallPositions[i][0]].status = statuses.empty;}
@@ -142,13 +126,17 @@ function changeDirection(direction){
         try{grid[historyOfLeadingBallPositions[0][1]][historyOfLeadingBallPositions[0][0]].status = statuses.head;}
         catch{}
     }
-    leadingBall.direction = direction;
 }
 
 setInterval(() => {
     if (gameState === 1)document.getElementById("length").innerHTML = `Length: ${snakeLength}`;
     if (gameState === 2) document.getElementById("length").innerHTML = `Length: ${snakeLength}, press r to restart`;
 }, 150)
+
+document.addEventListener("swiped-up",()=> {changeDirection(directions.up); leadingBall.direction = directions.up;})
+document.addEventListener("swiped-right",()=> {changeDirection(directions.right); leadingBall.direction = directions.right;})
+document.addEventListener("swiped-down",()=> {changeDirection(directions.down); leadingBall.direction = directions.down;})
+document.addEventListener("swiped-left",()=> {changeDirection(directions.left); leadingBall.direction = directions.left;})
 
 function reload(){
     leadingBall = {
@@ -166,5 +154,5 @@ function reload(){
     }
     gameState = 0;
     setTimeout(()=> grid[Math.floor(Math.random()*40)][Math.floor(Math.random()*40)].status = statuses.apple, 100)
+    
 }
-

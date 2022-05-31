@@ -6,16 +6,15 @@
         <title>Snake game</title>
         <script src="p5.js"></script>
         <script src="p5.min.js"></script>
+        <script src="swipedevents.js"></script>
     </head>
 
     <body>
         <div id="length"></div>
-        <div id="game"></div>
-        <button onclick="changeDirection(directions.up)">up</button>
-        <button onclick="changeDirection(directions.right)">right</button>
-        <button onclick="changeDirection(directions.down)">down</button>
-        <button onclick="changeDirection(directions.left)">left</button>
-        <button onclick="reload()">reload</button>
+        <div id="game">
+        </div>
+
+        <button onclick="reload()" style="width: 100px;height:100px;display: block;">Reload</button>
         <script src="grid.js"></script>
         <script src="snake.js"></script>
     </body>
