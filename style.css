@@ -5,6 +5,7 @@
     background-color:  black;
     grid-template-columns: repeat(40,1fr);
     grid-template-rows: repeat(40,1fr);
+    gap: 1px;
 }
 
 .empty {
@@ -17,4 +18,12 @@
 
 .apple {
     background-color: red;
+}
+
+#length {
+    color: darkgreen;
+    position: absolute;
+    font-size: 2em;
+    top:10px;
+    left:15px;
 }

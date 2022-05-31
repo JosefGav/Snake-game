@@ -1,4 +1,3 @@
-let snake = [];
 const directions = {
     up: "up",
     right:"right",
@@ -31,11 +30,13 @@ setInterval(() => {
         
 
         historyOfLeadingBallPositions.unshift([leadingBall.x,leadingBall.y]);
-        if (grid[leadingBall.y][leadingBall.x].status === statuses.apple) {
-            grid[leadingBall.y][leadingBall.x].status === statuses.empty;
-            snakeLength++;
-            generateFood()
-        }
+        try{
+            if (grid[leadingBall.y][leadingBall.x].status === statuses.apple) {
+                grid[leadingBall.y][leadingBall.x].status === statuses.empty;
+                snakeLength++;
+                generateFood()
+            }
+        } catch {}
 
         
 
@@ -44,14 +45,17 @@ setInterval(() => {
             try{grid[historyOfLeadingBallPositions[i][1]][historyOfLeadingBallPositions[i][0]].status = statuses.snake;}
             catch{}
         }
-        if (grid[leadingBall.y][leadingBall.x].status === statuses.snake) {gameState = 2; return}
+        
+        if (leadingBall.y >= 40 || leadingBall.y < 0 || leadingBall.x < 0 || leadingBall.x >= 40) {gameState = 2; return}
+        if (grid[leadingBall.y][leadingBall.x].status === statuses.snake ) {gameState = 2; return}
+
         try{grid[historyOfLeadingBallPositions[0][1]][historyOfLeadingBallPositions[0][0]].status = statuses.head;}
         catch{}
 
         
         
-    }
-}, 250);
+    } 
+}, 150);
 
 document.addEventListener("keydown",e => {
     if (gameState != 2) gameState = 1;
@@ -74,7 +78,24 @@ document.addEventListener("keydown",e => {
             changeDirection(directions.left)
             leadingBall.direction = directions.left;
             break;
-    }
+        case 82:
+            leadingBall = {
+                x:20,
+                y:39,
+                direction: directions.up,
+            }
+            historyOfLeadingBallPositions = [[leadingBall.x,leadingBall.y]];
+            snakeLength = 5;
+
+            for (let y = 0; y < 40 ; y ++) {
+                for (let x = 0; x < 40; x++){
+                    grid[y][x].status = statuses.empty;
+                }
+            }
+            gameState = 0;
+            setTimeout(()=> grid[Math.floor(Math.random()*40)][Math.floor(Math.random()*40)].status = statuses.apple, 100)
+            }
+
 })
 
 function generateFood() {
@@ -121,3 +142,8 @@ function changeDirection(direction){
         catch{}
     }
 }
+
+setInterval(() => {
+    if (gameState === 1)document.getElementById("length").innerHTML = `Length: ${snakeLength}`;
+    if (gameState === 2) document.getElementById("length").innerHTML = `Length: ${snakeLength}, press r to restart`;
+}, 150)
