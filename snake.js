@@ -55,17 +55,23 @@ setInterval(() => {
 
 document.addEventListener("keydown",e => {
     if (gameState != 2) gameState = 1;
+    
     switch (e.keyCode){
         case 38:
+            changeDirection(directions.up)
             leadingBall.direction = directions.up;
+
             break;
         case 39:
+            changeDirection(directions.right)
             leadingBall.direction = directions.right;
             break;
         case 40:
+            changeDirection(directions.down)
             leadingBall.direction = directions.down;
             break;
         case 37:
+            changeDirection(directions.left)
             leadingBall.direction = directions.left;
             break;
     }
@@ -82,3 +88,36 @@ function generateFood() {
 
     grid[y][x].status = statuses.apple;
 } 
+
+function changeDirection(direction){
+    if (gameState === 1 && leadingBall.direction != direction) {
+        for (let i = 0; i < snakeLength; i++) {
+            try{grid[historyOfLeadingBallPositions[i][1]][historyOfLeadingBallPositions[i][0]].status = statuses.empty;}
+            catch{}
+        }
+
+        if (direction === directions.up) leadingBall.y--;
+        else if (direction === directions.right) leadingBall.x++;
+        else if (direction === directions.down) leadingBall.y++;
+        else if (direction === directions.left) leadingBall.x--;
+        
+
+        historyOfLeadingBallPositions.unshift([leadingBall.x,leadingBall.y]);
+        if (grid[leadingBall.y][leadingBall.x].status === statuses.apple) {
+            grid[leadingBall.y][leadingBall.x].status === statuses.empty;
+            snakeLength++;
+            generateFood()
+        }
+
+        
+
+
+        for (let i = 1; i < snakeLength; i++) {
+            try{grid[historyOfLeadingBallPositions[i][1]][historyOfLeadingBallPositions[i][0]].status = statuses.snake;}
+            catch{}
+        }
+        if (grid[leadingBall.y][leadingBall.x].status === statuses.snake) {gameState = 2; return}
+        try{grid[historyOfLeadingBallPositions[0][1]][historyOfLeadingBallPositions[0][0]].status = statuses.head;}
+        catch{}
+    }
+}
