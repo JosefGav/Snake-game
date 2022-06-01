@@ -62,21 +62,21 @@ document.addEventListener("keydown",e => {
     
     switch (e.keyCode){
         case 38:
-            changeDirection(directions.up)
-            leadingBall.direction = directions.up;
+            if (leadingBall.direction != directions.down){changeDirection(directions.up)
+            leadingBall.direction = directions.up;}
 
             break;
         case 39:
-            changeDirection(directions.right)
-            leadingBall.direction = directions.right;
+            if (leadingBall.direction != directions.left) {changeDirection(directions.right)
+            leadingBall.direction = directions.right;}
             break;
         case 40:
-            changeDirection(directions.down)
-            leadingBall.direction = directions.down;
+            if (leadingBall.direction != directions.up) {changeDirection(directions.down)
+            leadingBall.direction = directions.down;}
             break;
         case 37:
-            changeDirection(directions.left)
-            leadingBall.direction = directions.left;
+            if (leadingBall.direction != directions.right) {changeDirection(directions.left)
+            leadingBall.direction = directions.left;}
             break;
         case 82:
             leadingBall = {
