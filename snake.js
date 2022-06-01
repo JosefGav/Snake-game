@@ -55,7 +55,7 @@ setInterval(() => {
         
         
     } 
-}, 150);
+}, 50);
 
 document.addEventListener("keydown",e => {
     if (gameState != 2) gameState = 1;
