@@ -5,8 +5,8 @@ const directions = {
     left: "left"
 }
 let leadingBall = {
-    x:20,
-    y:39,
+    x:3,
+    y:4,
     direction: directions.up,
 }
 let historyOfLeadingBallPositions = [[leadingBall.x,leadingBall.y]];
@@ -80,8 +80,8 @@ document.addEventListener("keydown",e => {
             break;
         case 82:
             leadingBall = {
-                x:20,
-                y:39,
+                x:3,
+                y:2,
                 direction: directions.up,
             }
             historyOfLeadingBallPositions = [[leadingBall.x,leadingBall.y]];
