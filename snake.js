@@ -12,7 +12,7 @@ let leadingBall = {
 let historyOfLeadingBallPositions = [[leadingBall.x,leadingBall.y]];
 let snakeLength = 5;
 
-setTimeout(()=> grid[Math.floor(Math.random()*5)][Math.floor(Math.random()*5)].status = statuses.apple, 100)
+setTimeout(()=> grid[Math.floor(Math.random()*40)][Math.floor(Math.random()*40)].status = statuses.apple, 100)
 
 setInterval(() => {
     if (gameState===1) {
@@ -46,7 +46,7 @@ setInterval(() => {
             catch{}
         }
         
-        if (leadingBall.y >= 5 || leadingBall.y < 0 || leadingBall.x < 0 || leadingBall.x >= 5) {gameState = 2; return}
+        if (leadingBall.y >= 40 || leadingBall.y < 0 || leadingBall.x < 0 || leadingBall.x >= 40) {gameState = 2; return}
         if (grid[leadingBall.y][leadingBall.x].status === statuses.snake ) {gameState = 2; return}
 
         try{grid[historyOfLeadingBallPositions[0][1]][historyOfLeadingBallPositions[0][0]].status = statuses.head;}
@@ -87,24 +87,24 @@ document.addEventListener("keydown",e => {
             historyOfLeadingBallPositions = [[leadingBall.x,leadingBall.y]];
             snakeLength = 5;
 
-            for (let y = 0; y < 5 ; y ++) {
-                for (let x = 0; x < 5; x++){
+            for (let y = 0; y < 40 ; y ++) {
+                for (let x = 0; x < 40; x++){
                     grid[y][x].status = statuses.empty;
                 }
             }
             gameState = 0;
-            setTimeout(()=> grid[Math.floor(Math.random()*5)][Math.floor(Math.random()*5)].status = statuses.apple, 100)
+            setTimeout(()=> grid[Math.floor(Math.random()*40)][Math.floor(Math.random()*40)].status = statuses.apple, 100)
             }
 
 })
 
 function generateFood() {
-    let x = Math.floor(Math.random()*5);
-    let y = Math.floor(Math.random()*5);
+    let x = Math.floor(Math.random()*40);
+    let y = Math.floor(Math.random()*40);
 
     while (grid[y][x].status === statuses.snake || grid[y][x].status === statuses.head) {
-        x = Math.floor(Math.random()*5);
-        y = Math.floor(Math.random()*5);
+        x = Math.floor(Math.random()*40);
+        y = Math.floor(Math.random()*40);
     }
 
     grid[y][x].status = statuses.apple;
