@@ -32,7 +32,7 @@ setInterval(() => {
         historyOfLeadingBallPositions.unshift([leadingBall.x,leadingBall.y]);
         try{
             if (grid[leadingBall.y][leadingBall.x].status === statuses.apple) {
-                grid[leadingBall.y][leadingBall.x].status === statuses.empty;
+                grid[leadingBall.y][leadingBall.x].status === statuses.head;
                 snakeLength++;
                 generateFood()
             }
