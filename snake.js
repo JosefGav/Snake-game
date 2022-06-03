@@ -146,4 +146,6 @@ function changeDirection(direction){
 setInterval(() => {
     if (gameState === 1)document.getElementById("length").innerHTML = `Length: ${snakeLength}`;
     if (gameState === 2) document.getElementById("length").innerHTML = `Length: ${snakeLength}, press r to restart`;
+    if (window.innerWidth >= window.innerHeight) {gameScreen.width = `${window.innerHeight-10}px`;gameScreen.height = `${window.innerHeight-10}px`}
+    if (window.innerHeight > window.innerWidth) {gameScreen.width = `${window.innerWidth-10}px`;gameScreen.height = `${window.innerWidth-10}px`}
 }, 150)
