@@ -2,9 +2,7 @@ let gameState = 0;
 let grid = [];
 const gameScreen = document.getElementById("game")
 
-document.addEventListener("keypress",()=>{
-    gameState = 1;
-})
+
 
 const statuses = {
     snake:"snake",
